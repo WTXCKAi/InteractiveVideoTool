@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <EditText
+        android:id="@+id/edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/search"
+        android:hint="输入查询关键字"
+        android:textSize="13dp"
+        android:textAlignment="center"/>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/tabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/homepage_tabs"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintHorizontal_weight="4"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/scene_label_filter"
+            app:tabTextAppearance="@style/TabLayoutTextStyle"
+            app:tabMode="fixed" />
+        <!--tabMode fixed 使tab宽度等分-->
+
+        <TextView
+            android:id="@+id/scene_label_filter"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/label_filter"
+            android:textSize="17dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_weight="1.3"
+            app:layout_constraintLeft_toRightOf="@id/homepage_tabs"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <com.nex3z.flowlayout.FlowLayout
+        android:id="@+id/scene_label_subSet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:flFlow="true"
+        app:flChildSpacing="auto"
+        app:flChildSpacingForLastRow="align"
+        app:flRtl="false"
+        android:layout_marginTop="14dp"
+        android:layout_marginBottom="14dp"
+        android:layout_marginLeft="14dp"
+        android:layout_marginRight="14dp"
+        app:flRowSpacing="8dp"
+        android:visibility="gone">
+
+    </com.nex3z.flowlayout.FlowLayout>
+
+    <com.nex3z.flowlayout.FlowLayout
+        android:id="@+id/scene_label_set"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:flChildSpacing="auto"
+        app:flChildSpacingForLastRow="auto"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="14dp"
+        android:layout_marginLeft="14dp"
+        android:layout_marginRight="12dp"
+        app:flRowSpacing="8dp"
+        android:visibility="gone">
+
+    </com.nex3z.flowlayout.FlowLayout>
+
+
+    <com.hlxh.interactivevideotool.myWidget.NoSwipeViewPager
+        android:id="@+id/content_viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

@@ -1,0 +1,86 @@
+{
+  "id": "demo1",
+  "name": "我是王中杰",
+  "cover": "test/cover.png",
+  "episodes": [
+    {
+      "id": "1",
+      "type": "start",
+      "url": "test/test1.mp4",
+      "title": "1",
+      "question": {
+        "title": "I am No.1",
+        "options": [
+          {
+            "id": "2",
+            "type": "episode"
+          },
+          {
+            "id": "3",
+            "type": "episode"
+          }
+        ],
+        "optionTexts": [
+          "to 2",
+          "to 3"
+        ]
+      }
+    },
+    {
+      "id": "2",
+      "type": "normal",
+      "url": "test/test2.mp4",
+      "title": "2",
+      "question": {
+        "title": "I am No.2",
+        "options": [
+          {
+            "id": "3",
+            "type": "link",
+            "x": 0.25,
+            "y": 0.8
+          },
+          {
+            "id": "4",
+            "type": "episode",
+            "x": 0.6,
+            "y": 0.8
+          }
+        ],
+        "optionTexts": [
+          "to 3",
+          "to 4 end"
+        ]
+      }
+    },
+    {
+      "id": "3",
+      "type": "normal",
+      "url": "test/test3.mp4",
+      "title": "3",
+      "question": {
+        "title": "I am No.3",
+        "options": [
+          {
+            "id": "3",
+            "type": "link"
+          },
+          {
+            "id": "1",
+            "type": "link"
+          }
+        ],
+        "optionTexts": [
+          "repeat 3",
+          "to 1"
+        ]
+      }
+    },
+    {
+      "id": "4",
+      "title": "4",
+      "type": "finished",
+      "url": "test/test4.mp4"
+    }
+  ]
+}

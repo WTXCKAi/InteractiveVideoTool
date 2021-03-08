@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/bottom_navigation"
+    app:startDestination="@id/navigation_homepage">
+
+    <fragment
+        android:id="@+id/navigation_homepage"
+        android:name="com.hlxh.interactivevideotool.ui.homepage.HomepageFragment"
+        android:label="@string/title_homepage"
+        tools:layout="@layout/fragment_homepage" />
+
+    <dialog
+        android:id="@+id/navigation_creation"
+        android:name="com.hlxh.interactivevideotool.ui.create.CreateFragment"
+        android:label="创建"
+        tools:layout="@layout/fragment_create" />
+
+    <fragment
+        android:id="@+id/navigation_mine"
+        android:name="com.hlxh.interactivevideotool.ui.mine.MineFragment"
+        android:label="@string/title_mine"
+        tools:layout="@layout/fragment_mine" />
+
+</navigation>

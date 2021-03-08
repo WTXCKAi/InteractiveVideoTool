@@ -1,3 +1,28 @@
 <resources>
-    <string name="app_name">InteractiveVideoTool</string>
+    <string name="app_name">互动呀</string>
+    <string name="title_activity_tab_test">TabActivityTest</string>
+    <string name="tab_text_1">全部</string>
+    <string name="tab_text_2">受害场景</string>
+    <string name="tab_text_3">攻击场景</string>
+    <string name="title_activity_main_botton">互动呀</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_homepage">首页</string>
+    <string name="title_mine">我的</string>
+    <string name="label_filter">筛选  ▼</string>
+    <string name="title_create">新建作品</string>
+
+    <string-array name="label_array">
+        <item>XSS</item>
+        <item>SQL注入</item>
+        <item>Android</item>
+        <item>UAF</item>
+        <item>钓鱼</item>
+        <item>木马</item>
+        <item>文件上传</item>
+        <item>渗透</item>
+        <item>wifi</item>
+    </string-array>
+
 </resources>

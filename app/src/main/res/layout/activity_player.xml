@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black">
+
+
+    <com.google.android.exoplayer2.ui.PlayerView
+        android:id="@+id/player_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:controller_layout_id="@layout/player_controller_layout"
+        app:use_controller="false"
+        />
+
+    <fragment
+        android:name="com.hlxh.interactivevideotool.player.PlayHistory"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:tag="history_fragment" />
+
+    <fragment
+        android:name="com.hlxh.interactivevideotool.player.OptionsFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:tag="options_fragment" />
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

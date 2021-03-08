@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawerLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/edit_tree_bg"
+        >
+
+        <androidx.constraintlayout.motion.widget.MotionLayout
+            android:id="@+id/motionLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            app:layoutDescription="@xml/motion_list">
+
+            <include android:id="@+id/node_s"
+                layout="@layout/card_layout"/>
+
+            <include android:id="@+id/node_a"
+                layout="@layout/card_layout"/>
+
+            <include android:id="@+id/node_b"
+                layout="@layout/card_layout"/>
+
+            <include android:id="@+id/node_aa"
+                layout="@layout/card_layout"/>
+
+            <include android:id="@+id/node_ab"
+                layout="@layout/card_layout"/>
+
+            <include android:id="@+id/node_ba"
+                layout="@layout/card_layout"/>
+
+            <include android:id="@+id/node_bb"
+                layout="@layout/card_layout"/>
+
+            <include android:id="@+id/node_p1"
+                layout="@layout/card_layout"/>
+
+            <include android:id="@+id/node_p2"
+                layout="@layout/card_layout"/>
+
+
+            <ImageView
+                android:id="@+id/left_arr"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                app:srcCompat="@drawable/left_arr"
+                android:scaleType="fitXY"
+                app:layout_constraintEnd_toStartOf="@id/right_arr"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginStart="70dp"
+                android:layout_marginTop="30dp"/>
+
+            <ImageView
+                android:id="@+id/right_arr"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:scaleType="fitXY"
+                app:srcCompat="@drawable/right_arr"
+                app:layout_constraintStart_toEndOf="@id/left_arr"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginEnd="70dp"
+                android:layout_marginTop="30dp"/>
+
+        </androidx.constraintlayout.motion.widget.MotionLayout>
+    </FrameLayout>
+
+<!--    剧本目录-->
+    <FrameLayout
+        android:id="@+id/leftDrawer"
+        android:layout_width="300dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="end"
+        >
+
+        <FrameLayout
+            android:id="@+id/script_catalog"
+            android:background="@color/white_alpha"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </FrameLayout>
+
+
+</androidx.drawerlayout.widget.DrawerLayout>
