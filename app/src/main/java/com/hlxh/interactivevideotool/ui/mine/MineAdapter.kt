@@ -12,6 +12,8 @@ import com.hlxh.interactivevideotool.InteractiveVideoApplication
 import com.hlxh.interactivevideotool.R
 //import com.hlxh.interactivevideotool.ui.edit.EditActivity
 import com.hlxh.interactivevideotool.model.ScriptAbstract
+import com.hlxh.interactivevideotool.model.ScriptDetail
+import com.hlxh.interactivevideotool.parseUrl
 import com.hlxh.interactivevideotool.player.PlayerActivity
 import com.hlxh.interactivevideotool.ui.edit.EditActivity
 import kotlinx.android.synthetic.main.frag_mine_recycler_item_draft.view.*
@@ -23,12 +25,8 @@ class MineAdapter(val user: String) : RecyclerView.Adapter<MineViewHolder>() {
     private val DRAFT_VIEW: Int = 1
     private val VIDEO_VIEW: Int = 2
 
-    private var mScriptList: List<ScriptAbstract> = ArrayList()
+    private var mScriptList: List<ScriptDetail> = mutableListOf()
 
-//    inner class UserViewHolder(view: View) : MineViewHolder(view) {
-//        private val userPhoto: ImageView = view.user_photo
-//        private val userName: TextView = view.user_name
-//    }
 
     inner class DraftViewHolder(view: View) : MineViewHolder(view) {
         private val draft: ImageView = view.draft
@@ -43,12 +41,12 @@ class MineAdapter(val user: String) : RecyclerView.Adapter<MineViewHolder>() {
         private val cover: ImageView = view.cover
         private val title: TextView  = view.title
 
-        override fun bindModel(scriptAbstract: ScriptAbstract) {
+        override fun bindModel(script: ScriptDetail) {
             Glide.with(InteractiveVideoApplication.context)
-                .load(scriptAbstract.coverImageUrl)
+                .load(parseUrl(script.coverImageUrl))
                 .into(cover)
 
-            title.text = scriptAbstract.title
+            title.text = script.title
         }
         init {
             //长按进入剧情树
@@ -118,7 +116,7 @@ class MineAdapter(val user: String) : RecyclerView.Adapter<MineViewHolder>() {
         }
     }
 
-    fun setData(scriptAbstractList: List<ScriptAbstract>) {
-        mScriptList = scriptAbstractList as ArrayList
+    fun setData(scriptList: List<ScriptDetail>) {
+        mScriptList = scriptList
     }
 }

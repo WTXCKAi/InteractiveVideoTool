@@ -2,6 +2,7 @@ package com.hlxh.interactivevideotool
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
 import android.view.MotionEvent
 import android.view.View
 import androidx.navigation.findNavController
@@ -14,7 +15,6 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    //private val mLooperPagerItems =  ArrayList<LooperPagerItem>()
     private lateinit var navView: BottomNavigationView
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,6 +43,15 @@ class MainActivity : AppCompatActivity() {
 
 
         navView.setupWithNavController(navController)
+
+        navView.itemIconTintList = null
+        val navMenu = navView.menu
+//        navMenu.findItem(R.id.navigation_creation).run {
+//            iconTintMode = null
+//            iconTintList = null
+//            setIcon(R.drawable.create_icon_white)
+//        }
+
 //        navView.setItemOnTouchListener(0, object: View.OnTouchListener{
 //            override fun onTouch(v: View?, event: MotionEvent?): Boolean {
 //                changeColor(true)

@@ -18,6 +18,7 @@ import com.google.android.material.card.MaterialCardView
 import com.hlxh.interactivevideotool.R
 import com.hlxh.interactivevideotool.find
 import com.hlxh.interactivevideotool.findStart
+import com.hlxh.interactivevideotool.logic.repo.Repo
 import com.hlxh.interactivevideotool.model.*
 
 import kotlinx.android.synthetic.main.pin_layout.*
@@ -100,16 +101,16 @@ class EditActivity : AppCompatActivity(), DrawerLayout.DrawerListener {
 
     private fun setUpData() {
 
-        val videoId = intent.getStringExtra("videoId")
+        val videoId = intent.getStringExtra("scriptId")
 
         if (!TextUtils.isEmpty(videoId)) {
-//            ScriptDataSource.scripts.value!!.find { it.id == videoId }.let {
-//                if (it != null) {
-//                    video = it
-//                } else {
-//                    finish()
-//                }
-//            }
+            Repo.scripts.value!!.find { it.id == videoId }.let {
+                if (it != null) {
+                    script = it
+                } else {
+                    finish()
+                }
+            }
 
             if (script.episodeList.isEmpty()) {
                 initView()
@@ -152,6 +153,7 @@ class EditActivity : AppCompatActivity(), DrawerLayout.DrawerListener {
 
     }
 
+    //目录页
     private val catalogDrawerFragment = CatalogFragment()
 
     private fun setUpDrawer() {
@@ -172,7 +174,6 @@ class EditActivity : AppCompatActivity(), DrawerLayout.DrawerListener {
             .add(R.id.script_catalog, catalogDrawerFragment, "drawerCatalog")
             .commit()
     }
-
 
     private val catalogBottomSheetFragment = CatalogFragment().apply {
         setOnConfirmListener(object : CatalogFragment.OnConfirmListener {
@@ -211,15 +212,20 @@ class EditActivity : AppCompatActivity(), DrawerLayout.DrawerListener {
         val isCreation = node == null
         val isLinkNode = node?.type == OPTION_TYPE_LINK
         bottomSheet.findViewById<View>(R.id.btnEdit)
+                //编辑按钮
             ?.apply {
                 visibility = if (isLinkNode) View.GONE else View.VISIBLE
                 setOnClickListener {
+                    //进入episode编辑页
                     val editConfigureFragment = EditConfigureFragment()
+
                     editConfigureFragment.arguments = Bundle().apply {
                         putString(EditConfigureFragment.KEY_EPISODE_ID, episodeId)
                         putString(EditConfigureFragment.KEY_SCRIPT_ID, scriptId)
                     }
+
                     editConfigureFragment.setOnSave {
+                        //定义episode编辑页的save方法
                         if (episodeId == null) {
                             editConfigureFragment.dismiss()
                             createNode(it, OPTION_TYPE_EPISODE)
@@ -482,7 +488,7 @@ class EditActivity : AppCompatActivity(), DrawerLayout.DrawerListener {
     }
 
     private fun setTransitions(enable: Boolean) {
-    //??
+    //??？？？
         if (!enable) {
             Log.e("wangp", "clear")
             arrayOf(

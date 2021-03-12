@@ -1,0 +1,416 @@
+{
+  "clickRate": 5,
+  "script_coverImage_url": "https://img.zcool.cn/community/013de756fb63036ac7257948747896.jpg",
+  "date": "2021-2-1",
+  "episodeList": [
+    {
+      "episode_cover": "",
+      "episode_id": "episode1",
+      "interact_method": {
+        "optionList": [
+          {
+            "episode_id": "episode2",
+            "option_style": "",
+            "option_type": "episode",
+            "option_x": -1,
+            "option_y": -1
+          },
+          {
+            "episode_id": "episode3",
+            "option_style": "",
+            "option_type": "episode",
+            "option_x": -1,
+            "option_y": -1
+          }
+        ],
+        "optionTextList": [
+          "go to 2",
+          "go to 3"
+        ],
+        "questionText": "往哪里走？",
+        "tips": {
+          "tips_content": "",
+          "question_id": "",
+          "tips_image_url": "",
+          "tips_x": -1,
+          "tips_y": -1
+        },
+        "question_type": 0
+      },
+      "script_id": "s1",
+      "episode_title": "the first episode",
+      "episode_type": "start",
+      "episode_url": "victim/test/test1.mp4"
+    },
+    {
+      "episode_cover": "",
+      "episode_id": "episode2",
+      "interact_method": {
+        "optionList": [
+          {
+            "episode_id": "episode3",
+            "option_style": "",
+            "option_type": "link",
+            "option_x": 0.25,
+            "option_y": 0.8
+          },
+          {
+            "episode_id": "episode4",
+            "option_style": "",
+            "option_type": "episode",
+            "option_x": 0.6,
+            "option_y": 0.8
+          }
+        ],
+        "optionTextList": [
+          "go to 3",
+          "去 4 吧"
+        ],
+        "questionText": "你的选择是？",
+        "tips": {
+          "tips_content": "",
+          "question_id": "",
+          "tips_image_url": "",
+          "tips_x": -1,
+          "tips_y": -1
+        },
+        "question_type": 0
+      },
+      "script_id": "s1",
+      "episode_title": "the second episode",
+      "episode_type": "normal",
+      "episode_url": "victim/test/test2.mp4"
+    }
+  ],
+  "script_id": "id 1",
+  "label": "title 1",
+  "summary": "内容 1",
+  "title": "XSS",
+  "script_type": 1,
+  "user": ""
+},
+{
+  "clickRate": 1,
+  "script_coverImage_url": "https://t7.baidu.com/it/u=963301259,1982396977&fm=193&f=GIF",
+  "date": "2021-2-1",
+  "episodeList": [
+    {
+      "episode_cover": "",
+      "episode_id": "episode1",
+      "interact_method": {
+        "optionList": [
+          {
+            "episode_id": "episode2",
+            "option_style": "",
+            "option_type": "episode",
+            "option_x": -1,
+            "option_y": -1
+          },
+          {
+            "episode_id": "episode3",
+            "option_style": "",
+            "option_type": "episode",
+            "option_x": -1,
+            "option_y": -1
+          }
+        ],
+        "optionTextList": [
+          "go to 2",
+          "go to 3"
+        ],
+        "questionText": "往哪里走？",
+        "tips": {
+          "tips_content": "",
+          "question_id": "",
+          "tips_image_url": "",
+          "tips_x": -1,
+          "tips_y": -1
+        },
+        "question_type": 0
+      },
+      "script_id": "s1",
+      "episode_title": "the first episode",
+      "episode_type": "start",
+      "episode_url": "victim/test/test1.mp4"
+    },
+    {
+      "episode_cover": "",
+      "episode_id": "episode2",
+      "interact_method": {
+        "optionList": [
+          {
+            "episode_id": "episode3",
+            "option_style": "",
+            "option_type": "link",
+            "option_x": 0.25,
+            "option_y": 0.8
+          },
+          {
+            "episode_id": "episode4",
+            "option_style": "",
+            "option_type": "episode",
+            "option_x": 0.6,
+            "option_y": 0.8
+          }
+        ],
+        "optionTextList": [
+          "go to 3",
+          "去 4 吧"
+        ],
+        "questionText": "你的选择是？",
+        "tips": {
+          "tips_content": "",
+          "question_id": "",
+          "tips_image_url": "",
+          "tips_x": -1,
+          "tips_y": -1
+        },
+        "question_type": 0
+      },
+      "script_id": "s1",
+      "episode_title": "the second episode",
+      "episode_type": "normal",
+      "episode_url": "victim/test/test2.mp4"
+    }
+  ],
+  "script_id": "id 2",
+  "label": "title 2",
+  "summary": "内容 2",
+  "title": "XSS",
+  "script_type": 1,
+  "user": ""
+},
+{
+  "clickRate": 0,
+  "script_coverImage_url": "https://t7.baidu.com/it/u=1575628574,1150213623&fm=193&f=GIF",
+  "date": "2021-2-1",
+  "episodeList": [
+    {
+      "episode_cover": "",
+      "episode_id": "episode1",
+      "interact_method": {
+        "optionList": [
+          {
+            "episode_id": "episode2",
+            "option_style": "",
+            "option_type": "episode",
+            "option_x": -1,
+            "option_y": -1
+          },
+          {
+            "episode_id": "episode3",
+            "option_style": "",
+            "option_type": "episode",
+            "option_x": -1,
+            "option_y": -1
+          }
+        ],
+        "optionTextList": [
+          "go to 2",
+          "go to 3"
+        ],
+        "questionText": "往哪里走？",
+        "tips": {
+          "tips_content": "",
+          "question_id": "",
+          "tips_image_url": "",
+          "tips_x": -1,
+          "tips_y": -1
+        },
+        "question_type": 0
+      },
+      "script_id": "s1",
+      "episode_title": "the first episode",
+      "episode_type": "start",
+      "episode_url": "victim/test/test1.mp4"
+    },
+    {
+      "episode_cover": "",
+      "episode_id": "episode2",
+      "interact_method": {
+        "optionList": [
+          {
+            "episode_id": "episode3",
+            "option_style": "",
+            "option_type": "link",
+            "option_x": 0.25,
+            "option_y": 0.8
+          },
+          {
+            "episode_id": "episode4",
+            "option_style": "",
+            "option_type": "episode",
+            "option_x": 0.6,
+            "option_y": 0.8
+          }
+        ],
+        "optionTextList": [
+          "go to 3",
+          "去 4 吧"
+        ],
+        "questionText": "你的选择是？",
+        "tips": {
+          "tips_content": "",
+          "question_id": "",
+          "tips_image_url": "",
+          "tips_x": -1,
+          "tips_y": -1
+        },
+        "question_type": 0
+      },
+      "script_id": "s1",
+      "episode_title": "the second episode",
+      "episode_type": "normal",
+      "episode_url": "victim/test/test2.mp4"
+    }
+  ],
+  "script_id": "s1",
+  "label": "title 3",
+  "summary": "内容 3",
+  "title": "XSS",
+  "script_type": 1,
+  "user": ""
+},
+{
+  "clickRate": 7,
+  "script_coverImage_url": "https://www.cnitom.com/uploadfile/2020/0109/20200109025125725.jpg",
+  "date": "2021-2-1",
+  "episodeList": [
+    {
+      "episode_cover": "",
+      "episode_id": "episode1",
+      "interact_method": {
+        "optionList": [
+          {
+            "episode_id": "episode2",
+            "option_style": "",
+            "option_type": "episode",
+            "option_x": -1,
+            "option_y": -1
+          },
+          {
+            "episode_id": "episode3",
+            "option_style": "",
+            "option_type": "episode",
+            "option_x": -1,
+            "option_y": -1
+          }
+        ],
+        "optionTextList": [
+          "go to 2",
+          "go to 3"
+        ],
+        "questionText": "往哪里走？",
+        "tips": {
+          "tips_content": "",
+          "question_id": "",
+          "tips_image_url": "",
+          "tips_x": -1,
+          "tips_y": -1
+        },
+        "question_type": 0
+      },
+      "script_id": "s1",
+      "episode_title": "the first episode",
+      "episode_type": "start",
+      "episode_url": "victim/test/test1.mp4"
+    },
+    {
+      "episode_cover": "",
+      "episode_id": "episode2",
+      "interact_method": {
+        "optionList": [
+          {
+            "episode_id": "episode3",
+            "option_style": "",
+            "option_type": "link",
+            "option_x": 0.25,
+            "option_y": 0.8
+          },
+          {
+            "episode_id": "episode4",
+            "option_style": "",
+            "option_type": "episode",
+            "option_x": 0.6,
+            "option_y": 0.8
+          }
+        ],
+        "optionTextList": [
+          "go to 3",
+          "去 4 吧"
+        ],
+        "questionText": "你的选择是？",
+        "tips": {
+          "tips_content": "",
+          "question_id": "",
+          "tips_image_url": "",
+          "tips_x": -1,
+          "tips_y": -1
+        },
+        "question_type": 0
+      },
+      "script_id": "s1",
+      "episode_title": "the second episode",
+      "episode_type": "normal",
+      "episode_url": "victim/test/test2.mp4"
+    }
+  ],
+  "script_id": "s1",
+  "label": "title 4",
+  "summary": "内容 4",
+  "title": "XSS",
+  "script_type": 0,
+  "user": ""
+},
+{
+  "clickRate": 15,
+  "script_coverImage_url": "https://img.zcool.cn/community/013de756fb63036ac7257948747896.jpg",
+  "date": "2021-2-1",
+  "episodeList": [
+    {
+      "episode_cover": "",
+      "episode_id": "episode1",
+      "interact_method": {
+        "optionList": [
+          {
+            "episode_id": "episode2",
+            "option_style": "",
+            "option_type": "episode",
+            "option_x": -1,
+            "option_y": -1
+          },
+          {
+            "episode_id": "episode3",
+            "option_style": "",
+            "option_type": "episode",
+            "option_x": -1,
+            "option_y": -1
+          }
+        ],
+        "optionTextList": [
+          "go to 2",
+          "go to 3"
+        ],
+        "questionText": "往哪里走？",
+        "tips": {
+          "tips_content": "",
+          "question_id": "",
+          "tips_image_url": "",
+          "tips_x": -1,
+          "tips_y": -1
+        },
+        "question_type": 0
+      },
+      "script_id": "s1",
+      "episode_title": "the first episode",
+      "episode_type": "start",
+      "episode_url": "victim/test/test1.mp4"
+    }
+  ],
+  "script_id": "s1",
+  "label": "title 5",
+  "summary": "内容 5",
+  "title": "XSS",
+  "script_type": 1,
+  "user": ""
+}

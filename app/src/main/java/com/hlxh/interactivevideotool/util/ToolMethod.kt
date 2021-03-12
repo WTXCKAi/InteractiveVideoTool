@@ -18,7 +18,7 @@ fun parseUrl(url: String): Uri {
 
     return when {
         url.startsWith("http://") -> Uri.parse(url)
-
+        url.startsWith("https://") -> Uri.parse(url)
         url.startsWith("/") -> fromFile(url)
 
         else -> fromAsset(url)

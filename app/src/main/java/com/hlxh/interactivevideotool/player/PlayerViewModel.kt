@@ -13,7 +13,7 @@ class PlayerViewModel : ViewModel() {
 
     fun loadScriptDetail(id: String) {
         viewModelScope.launch{
-            scriptDetailLiveData.value = Repo.loadScriptDetail(id)
+            scriptDetailLiveData.value = Repo.loadScriptDetailFromServer(id)
         }
     }
 

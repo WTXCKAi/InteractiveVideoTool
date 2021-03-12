@@ -25,10 +25,12 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatDialogFragment
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LiveData
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.hlxh.interactivevideotool.R
+import com.hlxh.interactivevideotool.logic.repo.Repo
 import com.hlxh.interactivevideotool.model.ScriptDetail
 import com.hlxh.interactivevideotool.model.TYPE_HACKER
 import com.hlxh.interactivevideotool.model.TYPE_VICTIM
@@ -188,32 +190,26 @@ class CreateFragment : AppCompatDialogFragment() {
     }
 
     private fun saveScript() {
-//        val id = UUID.randomUUID().toString() //随机生成唯一id
-//        val title = input_title.text.toString().trim()
-//        val label = mLabel
-//        val type = mScriptType
-//        val summary = content_summary_input.text.toString().trim()
-//        val coverImageUrl = mPhotoUrl!!
-//        mOnSaveBlock?.invoke(
-//            ScriptDetail(id, type, coverImageUrl, label, title, summary)
-//        )
-//        Log.d("save", "id = $id, title = $title, label = $label, type = $type, summary = $summary, " +
-//                "url = $coverImageUrl")
-        //val simpleDateFormat: java.text.SimpleDateFormat = java.text.SimpleDateFormat("yyyy-mm-dd")
+
         val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd")
         val time = simpleDateFormat.format(Date(System.currentTimeMillis()))
 
-        mOnSaveBlock?.invoke(
-            ScriptDetail(
-                id = UUID.randomUUID().toString(),  //随机生成唯一id
-                title = input_title.text.toString().trim(),
-                label = mLabel,
-                type = mScriptType,
-                summary = content_summary_input.text.toString().trim(),
-                coverImageUrl = mPhotoUrl!!,
-                date = time
-                )
+        val newScript = ScriptDetail(
+            id = UUID.randomUUID().toString(),  //随机生成唯一id
+            title = input_title.text.toString().trim(),
+            label = mLabel,
+            type = mScriptType,
+            summary = content_summary_input.text.toString().trim(),
+            coverImageUrl = mPhotoUrl!!,
+            date = time
         )
+        Repo.scripts.also { liveData ->
+            val newList = mutableListOf<ScriptDetail>()
+            liveData.value?.also { oldList -> newList.addAll(oldList) }
+            newList.add(0, newScript)  //添加到第一个
+            liveData.value = newList    //更新剧本数据源
+        }
+        Repo.writeToFile(newScript)
         dismiss()
     }
 

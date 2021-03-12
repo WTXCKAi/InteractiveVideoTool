@@ -12,9 +12,12 @@ import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.TextureView
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.TextView
+import androidx.core.view.isVisible
 import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.SimpleExoPlayer
 import com.google.android.exoplayer2.source.ProgressiveMediaSource
@@ -23,14 +26,18 @@ import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
 import com.google.android.exoplayer2.util.Util
 
 import com.hlxh.interactivevideotool.R
+import com.hlxh.interactivevideotool.find
 import com.hlxh.interactivevideotool.fromAsset
-import com.hlxh.interactivevideotool.model.Episode
+import com.hlxh.interactivevideotool.logic.repo.Repo
+import com.hlxh.interactivevideotool.model.*
 import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
-import kotlinx.android.synthetic.main.layout_edit_configure.*
+import kotlinx.android.synthetic.main.card_layout.view.*
+import kotlinx.android.synthetic.main.edit_episode_frag.*
 import java.io.File
+import java.util.*
 
 
 /**
@@ -77,7 +84,7 @@ class EditConfigureFragment : FixedHeightBottomSheetDialogFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.layout_edit_configure, container, false)
+        return inflater.inflate(R.layout.edit_episode_frag, container, false)
     }
 
 
@@ -104,47 +111,60 @@ class EditConfigureFragment : FixedHeightBottomSheetDialogFragment() {
         episode_title.setText(title)
         episode_title.setSelection(title.length)
 
-        options_title.setText(incomeEpisode.interact?.questionText)
+        val interactType = incomeEpisode.interact?.type ?: QUESTION_ANSWER
+        if (interactType == QUESTION_SELECT) {
+            select_radio_button.isChecked = true
+            select_container.isVisible = true
+            QA_container.isVisible = false
 
-        incomeEpisode.interact?.optionTextList?.forEachIndexed { index, option ->
+            option_title.setText(incomeEpisode.interact?.questionText)
 
-            val itemView =
-                layoutInflater.inflate(R.layout.layout_option_item, options, false)
+            incomeEpisode.interact?.optionTextList?.forEachIndexed { index, option ->
+                when (index) {
+                    0 -> {
+                        optionA_text.setText(option)
+                        optionList.add(optionA_text)
+                    }
+                    1 -> {
+                        optionB_text.setText(option)
+                        optionList.add(optionB_text)
+                    }
+                }
+            }
 
-            val edit = itemView.findViewById<EditText>(R.id.content)
-            val indicator =  itemView.findViewById<TextView>(R.id.indicator)
+        } else {
+            QA_radio_button.isChecked = true
+            select_container.isVisible = false
+            QA_container.isVisible = true
 
-            indicator.text = optionIndicators[index]
-            edit.setText(option)
-
-            options.addView(itemView)
-            optionList.add(edit)
+            question_text.setText(incomeEpisode.interact?.questionText)
+            answer_text.setText(incomeEpisode.interact?.answer)
         }
 
-        updateOptionsTitleVisible()
+        //updateOptionsTitleVisible()  感觉用不上
         updateEditFrameBtnVisible()
     }
 
     private fun doObserve() {
-        frame_preview.setOnClickListener {
+        add_video_button.setOnClickListener {
             pickVideo()
         }
 
         edit_frame_btn.setOnClickListener {
+            //编辑选项位置
             if (videoUrl.isNotEmpty() && optionList.isNotEmpty()) {
                 editFrame()
             }
         }
 
-        save_button.setOnClickListener {
+        save_button_container.setOnClickListener {
             saveEpisode()
         }
     }
 
     private fun fetchEpisode(episodeId: String, scriptId: String): Observable<Episode> = Observable.fromCallable {
-//        ScriptDataSource.scripts.value?.find { it.id == scriptId  }?.find(episodeId)
-//            ?: Episode(id = UUID.randomUUID().toString())
-        Episode()
+        Repo.scripts.value?.find { it.id == scriptId  }?.find(episodeId)
+            ?: Episode(id = UUID.randomUUID().toString())
     }
 
     private fun saveEpisode() {
@@ -156,7 +176,7 @@ class EditConfigureFragment : FixedHeightBottomSheetDialogFragment() {
     private fun updateEpisode() {
         incomeEpisode.url = videoUrl
         incomeEpisode.title = episode_title.text.toString()
-        incomeEpisode.interact?.questionText = options_title.text.toString()
+        incomeEpisode.interact?.questionText = question_text.text.toString()
 
         optionList.forEachIndexed { index, view ->
             incomeEpisode.interact?.optionTextList?.set(index, view.text.toString())
@@ -178,27 +198,28 @@ class EditConfigureFragment : FixedHeightBottomSheetDialogFragment() {
     }
 
     private fun updateVideoUrl(url: String) {
-        videoUrl  = url
+        videoUrl = url
         if (videoUrl.isNotEmpty()) {
-            val bm = extractFrame(url)
+             extractFrame(url)
         } else {
-            frame_preview.setImageResource(R.drawable.ic_launcher_background)
+            add_video_button.setImageResource(R.drawable.ic_launcher_background)//设背景图
         }
     }
 
     private fun updateEditFrameBtnVisible() {
-        edit_frame_btn.visibility = if (videoUrl.isNotEmpty() && optionList.isNotEmpty()) {
-            View.VISIBLE
-        } else {
-            View.GONE
-        }
+        edit_frame_btn.visibility = VISIBLE
+//        edit_frame_btn.visibility = if (videoUrl.isNotEmpty() && optionList.isNotEmpty()) {
+//            VISIBLE
+//        } else {
+//            GONE
+//        }
     }
 
     private fun updateOptionsTitleVisible() {
-        options_title.visibility = if (optionList.isNotEmpty()) {
-            View.VISIBLE
+        option_title.visibility = if (optionList.isNotEmpty()) {
+            VISIBLE
         } else {
-            View.GONE
+            GONE
         }
     }
 
@@ -214,6 +235,7 @@ class EditConfigureFragment : FixedHeightBottomSheetDialogFragment() {
     }
 
     private fun extractFrame(url: String) {
+        //自动抽帧
         extractDisposable?.dispose()
         extractDisposable = Single.create<Unit> { emitter ->
             initPlayer()
@@ -238,7 +260,7 @@ class EditConfigureFragment : FixedHeightBottomSheetDialogFragment() {
             .subscribe({
                 Thread.sleep(500L)
                 frame = (player_view.videoSurfaceView as TextureView).bitmap
-                frame_preview.setImageBitmap(frame)
+                add_video_button.setImageBitmap(frame)
             }, {
                 it.printStackTrace()
             })
@@ -269,6 +291,14 @@ class EditConfigureFragment : FixedHeightBottomSheetDialogFragment() {
 
     fun setOnSave(action: (episode: Episode) -> Unit) {
         onSave = action
+//        if (episodeId == null) {
+//            editConfigureFragment.dismiss()
+//            createNode(it, OPTION_TYPE_EPISODE)
+//        } else {
+//            editConfigureFragment.dismiss()
+//        }
+//
+//        updateView()
     }
 }
 

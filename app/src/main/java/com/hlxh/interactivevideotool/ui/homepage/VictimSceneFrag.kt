@@ -9,11 +9,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.gson.Gson
 import com.hlxh.interactivevideotool.R
-import com.hlxh.interactivevideotool.model.Episode
-import com.hlxh.interactivevideotool.model.Question
-import com.hlxh.interactivevideotool.model.ScriptDetail
+import com.hlxh.interactivevideotool.logic.repo.Repo
 import kotlinx.android.synthetic.main.fragment_all_scene.*
 
 /**
@@ -31,7 +28,8 @@ class VictimSceneFrag : Fragment(){
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        mViewModel.loadScriptAbstract("victim")//在这进行首次网络请求
+//        mViewModel.loadScriptAbstract("victim")//在这进行首次网络请求
+        Repo.loadVictimScript()
         return inflater.inflate(R.layout.fragment_victim_scene, container, false)
     }
     @SuppressLint("ResourceAsColor")
@@ -40,10 +38,10 @@ class VictimSceneFrag : Fragment(){
         Log.d("AllSceneFrag"," onViewCreated")
 
         //订阅looperLiveData
-        mViewModel.scriptAbstractLiveData.observe(viewLifecycleOwner) {
+        Repo.victimScripts.observe(viewLifecycleOwner) {
             //T!意味着 “T" 或 "T?”
-            Log.d("crash", "VIctim ******** 收到list长度= $it.videoAbstractList")
-            mAdapter.setData(it.scriptAbstractList)
+            //Log.d("crash", "Victim ******** 收到list长度= ${(it as ArrayList).size}")
+            mAdapter.setData(it)
             mAdapter.notifyDataSetChanged()
             swipe_refresh.isRefreshing = false  //数据返回后就隐藏刷新进度条
         }
@@ -55,20 +53,10 @@ class VictimSceneFrag : Fragment(){
         swipe_refresh.setColorSchemeColors(R.color.design_default_color_primary)
         swipe_refresh.setOnRefreshListener {
             //发起网络请求获取新数据
-            mViewModel.loadScriptAbstract("victim")
+            Repo.loadVictimScript()
         }
 
-        //,,,,,,生成json数据
-//        val episode = Episode("id1", "v1", "http://vjs.zencdn.net/v/oceans.mp4", "test", "start")
-//
-//        val scriptDetail = ScriptDetail("v1", episodeList = arrayListOf(episode))
-//
-//        //主要就是这句
-//        val jsonre = Gson().toJson(scriptDetail)
-//
-//        Log.d("tojson", jsonre)
 
-        //生成一个完整script的数据，测试用
 
     }
 

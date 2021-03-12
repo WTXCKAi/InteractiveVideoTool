@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.hlxh.interactivevideotool.R
+import com.hlxh.interactivevideotool.logic.repo.Repo
 import kotlinx.android.synthetic.main.fragment_hacker_scene.*
 
 
@@ -26,7 +27,7 @@ class HackerSceneFrag : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         Log.d("hackerSceneFrag"," onCreateView")
-        mViewModel.loadScriptAbstract("hacker")
+        Repo.loadHackerScript()
         val contextThemeWrapper = ContextThemeWrapper(activity, R.style.HackerStyle)
         val localInflater = inflater.cloneInContext(contextThemeWrapper)
         return localInflater.inflate(R.layout.fragment_hacker_scene, container, false)
@@ -37,8 +38,8 @@ class HackerSceneFrag : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         Log.d("hackerSceneFrag"," onViewCreated")
 
-        mViewModel.scriptAbstractLiveData.observe(viewLifecycleOwner) {
-            mAdapter.setData(it.scriptAbstractList)
+        Repo.hackerScripts.observe(viewLifecycleOwner) {
+            mAdapter.setData(it)
             mAdapter.notifyDataSetChanged()
             swipe_refresh.isRefreshing = false
         }
@@ -48,7 +49,7 @@ class HackerSceneFrag : Fragment() {
 
         swipe_refresh.setColorSchemeColors(R.color.design_default_color_primary)
         swipe_refresh.setOnRefreshListener {
-            mViewModel.loadScriptAbstract("hacker")
+            Repo.loadHackerScript()
         }
     }
 }

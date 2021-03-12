@@ -12,17 +12,18 @@ import com.hlxh.interactivevideotool.InteractiveVideoApplication
 import com.hlxh.interactivevideotool.R
 import com.hlxh.interactivevideotool.model.*
 import com.hlxh.interactivevideotool.myWidget.LooperPager
+import com.hlxh.interactivevideotool.parseUrl
 import com.hlxh.interactivevideotool.player.PlayerActivity
 import kotlinx.android.synthetic.main.frag_homepage_recycler_item_videoinfo.view.*
-import java.util.ArrayList
+import kotlin.collections.ArrayList
 
 class ContentAdapter(private val viewModel: HomepageViewModel) : RecyclerView.Adapter<ContentViewHolder>() {
 
     private val HEADERVIEW_TYPE: Int = 1
     private val FOOTERVIEW_TYPE: Int = 2
     private val TAG = "crash"
-    private var mVideoAbstractList = ArrayList<ScriptAbstract>()   //总的视频摘要列表
-    private var mLooperData: List<ScriptAbstract> = ArrayList<ScriptAbstract>()          //用在Looper中的数据，是总数据的子集
+    private var mVideoList = mutableListOf<ScriptDetail>()   //总的视频摘要列表
+    private var mLooperData: List<ScriptDetail> = mutableListOf()       //用在Looper中的数据，是总数据的子集
 
 
 
@@ -30,7 +31,7 @@ class ContentAdapter(private val viewModel: HomepageViewModel) : RecyclerView.Ad
         //1。轮播图
         private val looperPager: LooperPager = view.findViewById(R.id.looperPager)
 
-        override fun bindModel(looperData: List<ScriptAbstract>) {
+        override fun bindModel(looperData: List<ScriptDetail>) {
             Log.d(TAG, "looperData.size = ${looperData.size}")
             //if (looperData.isNotEmpty()) mLooperPager.setData(looperData)
             looperPager.setData(looperData)
@@ -50,21 +51,22 @@ class ContentAdapter(private val viewModel: HomepageViewModel) : RecyclerView.Ad
                 Log.d("click", "_____ contentViewHolder.adapterPosition = $adapterPosition")
 
                 val position = adapterPosition - 1
-                val scriptId = mVideoAbstractList[position].id
+                val scriptId = mVideoList[position].id
                 //启动新Activity，用于播放视频，传递video
                 Log.d("click", "____ YOU CLICK VIDEO $scriptId")
                 PlayerActivity.start(it.context, scriptId)
             }
         }
 
-        override fun bindModel(scriptAbstract: ScriptAbstract) {
+        override fun bindModel(script: ScriptDetail) {
             Glide.with(InteractiveVideoApplication.context)
-                .load(scriptAbstract.coverImageUrl)
+                .load(parseUrl(script.coverImageUrl))
                 .into(mCover)
+            Log.d("loadfromassets", "after parseUrl = ${parseUrl(script.coverImageUrl)}")
 
-            mTitle.text = scriptAbstract.title
-            mSummary.text = scriptAbstract.summary
-            mDate.text = scriptAbstract.date
+            mTitle.text = script.title
+            mSummary.text = script.summary
+            mDate.text = script.date
         }
 
     }
@@ -96,8 +98,8 @@ class ContentAdapter(private val viewModel: HomepageViewModel) : RecyclerView.Ad
             holder.bindModel(mLooperData)
         }
         else {
-            Log.d(TAG, "videoList, mVideoAbstractLIst.size = ${mVideoAbstractList.size}")
-            holder.bindModel(mVideoAbstractList[position-1])
+            Log.d(TAG, "videoList, mVideoAbstractLIst.size = ${mVideoList.size}")
+            holder.bindModel(mVideoList[position-1])
         }
     }
 
@@ -108,7 +110,7 @@ class ContentAdapter(private val viewModel: HomepageViewModel) : RecyclerView.Ad
         //所以总item数量 = 1 + mVideoAbstractList.size
         //looperPager这个item的position恒为0，视频列表
         //当该方法当返回值不为0时，就会调用onBindViewHolder
-        return if (mVideoAbstractList.isEmpty()) 0 else mVideoAbstractList.size + 1
+        return if (mVideoList.isEmpty()) 0 else mVideoList.size + 1
     }
 
     override fun getItemViewType(position: Int): Int {
@@ -116,14 +118,14 @@ class ContentAdapter(private val viewModel: HomepageViewModel) : RecyclerView.Ad
         else FOOTERVIEW_TYPE
     }
 
-    fun setData(scriptAbstractList: List<ScriptAbstract>) {
+    fun setData(scriptList: List<ScriptDetail>) {
         //服务端返回数据时才会调用
-        Log.d(TAG, "setData :::: videoAbstractList.size = ${scriptAbstractList.size}")
+        Log.d(TAG, "setData :::: videoAbstractList.size = ${scriptList.size}")
 
-        mVideoAbstractList = scriptAbstractList as ArrayList<ScriptAbstract>
+        mVideoList = scriptList as MutableList<ScriptDetail>
         Log.d(TAG, "this is setData")
         //筛选出播放量最高的3个
-        mLooperData = mVideoAbstractList.sortedByDescending { it.clickRate }.take(3) as ArrayList<ScriptAbstract>
+        mLooperData = mVideoList.sortedByDescending { it.clickRate }.take(3)
         Log.d(TAG, "mLooperData.size = ${mLooperData.size}")
 
     }

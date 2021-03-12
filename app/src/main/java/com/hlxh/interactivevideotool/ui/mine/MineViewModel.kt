@@ -5,12 +5,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.hlxh.interactivevideotool.logic.repo.Repo
-import com.hlxh.interactivevideotool.model.ScriptAbstractResponse
+import com.hlxh.interactivevideotool.model.ScriptResponse
 import kotlinx.coroutines.launch
 
 class MineViewModel : ViewModel() {
 
-    val videoAbstractLiveData = MutableLiveData<ScriptAbstractResponse>()
+    val videoAbstractLiveData = MutableLiveData<ScriptResponse>()
 
 
     fun loadUserVideo(type: String) {

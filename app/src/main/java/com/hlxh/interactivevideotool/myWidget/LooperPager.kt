@@ -14,6 +14,8 @@ import androidx.viewpager.widget.ViewPager
 import com.bumptech.glide.Glide
 import com.hlxh.interactivevideotool.R
 import com.hlxh.interactivevideotool.model.ScriptAbstract
+import com.hlxh.interactivevideotool.model.ScriptDetail
+import com.hlxh.interactivevideotool.parseUrl
 import com.hlxh.interactivevideotool.player.PlayerActivity
 import kotlinx.android.synthetic.main.looper_pager_layout.view.*
 
@@ -22,7 +24,7 @@ class LooperPager(context: Context?, attrs: AttributeSet) : LinearLayout(context
     private lateinit var mViewPager: AutoChangeViewPager
     private lateinit var mLooperPagerTitle: TextView
     private lateinit var mLooperPagerContent: TextView
-    private var mPagerItems: List<ScriptAbstract> = ArrayList<ScriptAbstract>()
+    private var mPagerItems: List<ScriptDetail> = ArrayList()
 
     init {
         //加载控件布局
@@ -58,7 +60,7 @@ class LooperPager(context: Context?, attrs: AttributeSet) : LinearLayout(context
 
     }
 
-    fun setData(pagerItems: List<ScriptAbstract>) {
+    fun setData(pagerItems: List<ScriptDetail>) {
         mPagerItems = pagerItems
         mViewPager.adapter = InnerAdapter()
 
@@ -95,8 +97,10 @@ class LooperPager(context: Context?, attrs: AttributeSet) : LinearLayout(context
             val realPosition = position % mPagerItems.size
 
             val pagerItem = mPagerItems[realPosition]
+            Log.d("loadfrom", "after parseUrl = ${parseUrl(pagerItem.coverImageUrl)}")
+
             Glide.with(this@LooperPager)
-                .load(pagerItem.coverImageUrl)
+                .load(parseUrl(pagerItem.coverImageUrl))
                 .into(cover)
             cover.scaleType = ImageView.ScaleType.FIT_XY
 

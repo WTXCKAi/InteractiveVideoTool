@@ -25,6 +25,8 @@ import com.google.android.exoplayer2.util.Util
 import com.hlxh.interactivevideotool.R
 import com.hlxh.interactivevideotool.find
 import com.hlxh.interactivevideotool.findStart
+import com.hlxh.interactivevideotool.logic.repo.Repo
+import com.hlxh.interactivevideotool.logic.repo.ScriptDataSource
 import com.hlxh.interactivevideotool.model.Episode
 import com.hlxh.interactivevideotool.model.QUESTION_SELECT
 import com.hlxh.interactivevideotool.model.ScriptDetail
@@ -114,25 +116,36 @@ class PlayerActivity : AppCompatActivity() {
 
         initializePlayer()
 
-        //取出videoId，发起网络请求
+        //取出videoId，到Repo中找数据源
         val scriptId = intent.getStringExtra("scriptId")
-        Log.d("play", "所选剧本id = $scriptId")
-        mViewModel.loadScriptDetail(scriptId!!)
-
-        //监听，获取详细视频段数据源
-        mViewModel.scriptDetailLiveData.observe(this) {
-            //mEpisodeList = it.episodeList as ArrayList<Episode>
-
+        Repo.scripts.value!!.find { it.id == scriptId }.let {
             if (it != null) {
                 mScriptDetail = it
-                Log.d("play", "收到片段的uri = ${it.episodeList[0].url}")
-                Log.d("interact", "interact = ${it.episodeList[0].interact}")
                 startVideo()
             } else {
                 Toast.makeText(this, "start a play", Toast.LENGTH_SHORT).show()
-               // finish()
+                //finish()
             }
         }
+        Log.d("playbug", "所选剧本id = $scriptId")
+        //网络请求的方式暂时弃用
+        //取出videoId，发起网络请求
+//        mViewModel.loadScriptDetail(scriptId!!)
+//
+//        //监听，获取详细视频段数据源
+//        mViewModel.scriptDetailLiveData.observe(this) {
+//            //mEpisodeList = it.episodeList as ArrayList<Episode>
+//
+//            if (it != null) {
+//                mScriptDetail = it
+//                Log.d("play", "收到片段的uri = ${it.episodeList[0].url}")
+//                Log.d("interact", "interact = ${it.episodeList[0].interact}")
+//                startVideo()
+//            } else {
+//                Toast.makeText(this, "start a play", Toast.LENGTH_SHORT).show()
+//               // finish()
+//            }
+//        }
 
         //隐藏状态栏，做沉浸式view（也就是常见的全屏）
         window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
@@ -160,7 +173,7 @@ class PlayerActivity : AppCompatActivity() {
         mScriptDetail?.let {
             val episode = it.findStart()
             if (episode != null) {
-                Log.d("play", "episode typ = ${episode.type}")
+                Log.d("playbug", "episode typ = ${episode.type}")
             }
             episode?.play()
         }
@@ -179,7 +192,6 @@ class PlayerActivity : AppCompatActivity() {
             mPlayer!!.setMediaItem(mediaItem)
             mPlayer!!.prepare()
         }
-
 
         mPlayerControlView.show()
         mPlayerHistory.setCurrentEpisode(this, fromHistory)
@@ -238,12 +250,15 @@ class PlayerActivity : AppCompatActivity() {
 
     override fun onStop() {
         super.onStop()
+        Log.d("playbug", "on stop")
         releasePlayer()
     }
 
     override fun onDestroy() {
         super.onDestroy()
         mPlayer?.removeListener(eventListener)
+        Log.d("playbug", "on destroy")
+
         releasePlayer()
     }
 

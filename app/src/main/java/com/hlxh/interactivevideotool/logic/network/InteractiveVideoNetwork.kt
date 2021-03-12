@@ -5,11 +5,11 @@ object InteractiveVideoNetwork {
     //创建LoadVideoService接口的动态代理对象
     private val loadScriptService = ServiceCreator.create<LoadScriptService>()
 
-    fun loadScriptAbstract(type: String) = loadScriptService.loadScriptAbstract(type)  //这里返回的是Call类型的数据
+    fun loadScript(type: String) = loadScriptService.loadScript(type)  //这里返回的是Call类型的数据
 
     fun loadScriptDetail(id: String) = loadScriptService.loadScriptDetail("1")
 
-    fun loadUserScript(user: String) = loadScriptService.loadScriptAbstract(user)
+    fun loadUserScript(user: String) = loadScriptService.loadScript(user)
 
 
     //suspend fun loadVideos() = loadVideoService.loadVideos("").await()

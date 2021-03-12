@@ -49,10 +49,10 @@
             android:layout_toRightOf="@id/script_title"
             android:layout_weight="4"
             android:background="@drawable/edit_bg"
-            android:paddingTop="2dp"
-            android:paddingBottom="2dp"
-            android:paddingLeft="4dp"
-            android:paddingRight="2dp"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="6dp"
             tools:text="biaoti 安全大作战"
             />
 
@@ -162,10 +162,10 @@
         app:layout_constraintLeft_toLeftOf="@id/scene_layout"
         app:layout_constraintRight_toRightOf="@id/scene_layout"
         app:layout_constraintTop_toBottomOf="@id/content_summary"
-        android:paddingTop="2dp"
-        android:paddingBottom="2dp"
-        android:paddingLeft="4dp"
-        android:paddingRight="4dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="6dp"
         tools:text="dddddddsssgsdgagahhagadadadfadfadfadadfadfadfadfadfaadfadfadfadfa" />
 
 

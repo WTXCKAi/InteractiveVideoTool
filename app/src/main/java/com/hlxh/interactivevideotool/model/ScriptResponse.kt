@@ -19,13 +19,13 @@ const val OPTION_TYPE_UNDEFINED = "undefined"
 const val OPTION_TYPE_LINK = "link"
 const val OPTION_TYPE_EPISODE = "episode"
 
-//interact_method
+//interact_type
 const val QUESTION_SELECT = 0
 const val QUESTION_ANSWER = 1
 
 
 
-data class ScriptAbstractResponse(val status: String, val scriptAbstractList: List<ScriptAbstract>)
+data class ScriptResponse(val status: String, val scriptList: List<ScriptDetail>)
 
 data class ScriptAbstract(
     @SerializedName("script_id") var id: String = "",
@@ -65,7 +65,7 @@ data class Episode(
 data class Question(
     @SerializedName("question_type") var type: Int = QUESTION_SELECT,
     var questionText: String = "",
-    //val answer: String = "",
+    var answer: String = "",
     var optionList: MutableList<Option> = arrayListOf(),
     var optionTextList: MutableList<String> = arrayListOf(),
     var tips: Tips = Tips()
